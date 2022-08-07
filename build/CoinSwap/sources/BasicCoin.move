@@ -18,7 +18,7 @@ module CoinSwap::BasicCoin {
         coin: Coin<CoinType>
     }
 
-    public fun publish_balance<CoinType>(account: &signer) {
+    public entry fun publish_balance<CoinType>(account: &signer) {
         let empty_coin = Coin<CoinType> { value: 0 };
         assert!(!exists<Balance<CoinType>>(signer::address_of(account)), error::already_exists(EALREADY_HAS_BALANCE));
         move_to(account, Balance<CoinType> { coin:  empty_coin });
@@ -42,7 +42,7 @@ module CoinSwap::BasicCoin {
 
     /// Mint `amount` tokens to `mint_addr`. This method requires a witness with `CoinType` so that the
     /// module that owns `CoinType` can decide the minting policy.
-    public fun mint<CoinType: drop>(mint_addr: address, amount: u64, _witness: CoinType) acquires Balance {
+    public entry fun mint<CoinType: drop>(mint_addr: address, amount: u64, _witness: CoinType) acquires Balance {
         // Deposit `amount` of tokens to mint_addr's balance
         deposit(mint_addr, Coin<CoinType> { value: amount });
     }
@@ -53,7 +53,7 @@ module CoinSwap::BasicCoin {
 
     /// Burn `amount` tokens from `burn_addr`. This method requires a witness with `CoinType` so that the
     /// module that owns `CoinType` can decide the burning policy.
-    public fun burn<CoinType: drop>(burn_addr: address, amount: u64, _witness: CoinType) acquires Balance {
+    public entry fun burn<CoinType: drop>(burn_addr: address, amount: u64, _witness: CoinType) acquires Balance {
         // Withdraw `amount` of tokens from mint_addr's balance
         let Coin { value: _ } = withdraw<CoinType>(burn_addr, amount);
     }
@@ -63,7 +63,7 @@ module CoinSwap::BasicCoin {
     }
 
 
-    public fun balance_of<CoinType>(owner: address): u64 acquires Balance {
+    public entry fun balance_of<CoinType>(owner: address): u64 acquires Balance {
         borrow_global<Balance<CoinType>>(owner).coin.value
     }
 
@@ -74,7 +74,7 @@ module CoinSwap::BasicCoin {
 
     /// Transfers `amount` of tokens from `from` to `to`. This method requires a witness with `CoinType` so that the
     /// module that owns `CoinType` can decide the transferring policy.
-    public fun transfer<CoinType: drop>(from: &signer, to: address, amount: u64, _witness: CoinType) acquires Balance {
+    public entry fun transfer<CoinType: drop>(from: &signer, to: address, amount: u64, _witness: CoinType) acquires Balance {
         let from_addr = signer::address_of(from);
         assert!(from_addr != to, EEQUAL_ADDR);
         let check = withdraw<CoinType>(from_addr, amount);

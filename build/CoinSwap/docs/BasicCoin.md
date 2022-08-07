@@ -144,7 +144,7 @@ Error codes
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_publish_balance">publish_balance</a>&lt;CoinType&gt;(account: &<a href="">signer</a>) {
+<pre><code><b>public</b> entry <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_publish_balance">publish_balance</a>&lt;CoinType&gt;(account: &<a href="">signer</a>) {
     <b>let</b> empty_coin = <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Coin">Coin</a>&lt;CoinType&gt; { value: 0 };
     <b>assert</b>!(!<b>exists</b>&lt;<a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a>&lt;CoinType&gt;&gt;(<a href="_address_of">signer::address_of</a>(account)), <a href="_already_exists">error::already_exists</a>(<a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_EALREADY_HAS_BALANCE">EALREADY_HAS_BALANCE</a>));
     <b>move_to</b>(account, <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a>&lt;CoinType&gt; { coin:  empty_coin });
@@ -200,7 +200,7 @@ module that owns <code>CoinType</code> can decide the minting policy.
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_mint">mint</a>&lt;CoinType: drop&gt;(mint_addr: <b>address</b>, amount: u64, _witness: CoinType) <b>acquires</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a> {
+<pre><code><b>public</b> entry <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_mint">mint</a>&lt;CoinType: drop&gt;(mint_addr: <b>address</b>, amount: u64, _witness: CoinType) <b>acquires</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a> {
     // Deposit `amount` of tokens <b>to</b> mint_addr's balance
     <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_deposit">deposit</a>(mint_addr, <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Coin">Coin</a>&lt;CoinType&gt; { value: amount });
 }
@@ -239,7 +239,7 @@ module that owns <code>CoinType</code> can decide the burning policy.
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_burn">burn</a>&lt;CoinType: drop&gt;(burn_addr: <b>address</b>, amount: u64, _witness: CoinType) <b>acquires</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a> {
+<pre><code><b>public</b> entry <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_burn">burn</a>&lt;CoinType: drop&gt;(burn_addr: <b>address</b>, amount: u64, _witness: CoinType) <b>acquires</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a> {
     // Withdraw `amount` of tokens from mint_addr's balance
     <b>let</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Coin">Coin</a> { value: _ } = <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_withdraw">withdraw</a>&lt;CoinType&gt;(burn_addr, amount);
 }
@@ -271,7 +271,7 @@ module that owns <code>CoinType</code> can decide the burning policy.
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_balance_of">balance_of</a>&lt;CoinType&gt;(owner: <b>address</b>): u64 <b>acquires</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a> {
+<pre><code><b>public</b> entry <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_balance_of">balance_of</a>&lt;CoinType&gt;(owner: <b>address</b>): u64 <b>acquires</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a> {
     <b>borrow_global</b>&lt;<a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a>&lt;CoinType&gt;&gt;(owner).coin.value
 }
 </code></pre>
@@ -310,7 +310,7 @@ module that owns <code>CoinType</code> can decide the transferring policy.
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_transfer">transfer</a>&lt;CoinType: drop&gt;(from: &<a href="">signer</a>, <b>to</b>: <b>address</b>, amount: u64, _witness: CoinType) <b>acquires</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a> {
+<pre><code><b>public</b> entry <b>fun</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_transfer">transfer</a>&lt;CoinType: drop&gt;(from: &<a href="">signer</a>, <b>to</b>: <b>address</b>, amount: u64, _witness: CoinType) <b>acquires</b> <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_Balance">Balance</a> {
     <b>let</b> from_addr = <a href="_address_of">signer::address_of</a>(from);
     <b>assert</b>!(from_addr != <b>to</b>, <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_EEQUAL_ADDR">EEQUAL_ADDR</a>);
     <b>let</b> check = <a href="BasicCoin.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_BasicCoin_withdraw">withdraw</a>&lt;CoinType&gt;(from_addr, amount);

@@ -4,6 +4,7 @@ version = "0.0.0"
 
 [addresses]
 CoinSwap = "0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00"
+std = "0x1"
 
 [dependencies]
 MoveStdlib = { git = "https://github.com/move-language/move.git", subdir = "language/move-stdlib", rev = "main" }

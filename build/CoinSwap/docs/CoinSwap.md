@@ -99,7 +99,7 @@
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="CoinSwap.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_CoinSwap_create_pool">create_pool</a>&lt;CoinType1: drop, CoinType2: drop&gt;(
+<pre><code><b>public</b> entry <b>fun</b> <a href="CoinSwap.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_CoinSwap_create_pool">create_pool</a>&lt;CoinType1: drop, CoinType2: drop&gt;(
     coinswap: &<a href="">signer</a>,
     requester: &<a href="">signer</a>,
     coin1: u64,
@@ -172,7 +172,7 @@
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="CoinSwap.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_CoinSwap_coin1_to_coin2_swap_input">coin1_to_coin2_swap_input</a>&lt;CoinType1: drop, CoinType2: drop&gt;(
+<pre><code><b>public</b> entry <b>fun</b> <a href="CoinSwap.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_CoinSwap_coin1_to_coin2_swap_input">coin1_to_coin2_swap_input</a>&lt;CoinType1: drop, CoinType2: drop&gt;(
     coinswap: &<a href="">signer</a>,
     requester: &<a href="">signer</a>,
     coin1: u64,
@@ -210,7 +210,7 @@
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="CoinSwap.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_CoinSwap_add_liquidity">add_liquidity</a>&lt;CoinType1: drop, CoinType2: drop&gt;(
+<pre><code><b>public</b> entry <b>fun</b> <a href="CoinSwap.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_CoinSwap_add_liquidity">add_liquidity</a>&lt;CoinType1: drop, CoinType2: drop&gt;(
     account: &<a href="">signer</a>,
     coin1: u64,
     coin2: u64,
@@ -252,7 +252,7 @@
 <summary>Implementation</summary>
 
 
-<pre><code><b>public</b> <b>fun</b> <a href="CoinSwap.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_CoinSwap_remove_liquidity">remove_liquidity</a>&lt;CoinType1: drop, CoinType2: drop&gt;(
+<pre><code><b>public</b> entry <b>fun</b> <a href="CoinSwap.md#0xd5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00_CoinSwap_remove_liquidity">remove_liquidity</a>&lt;CoinType1: drop, CoinType2: drop&gt;(
     coinswap: &<a href="">signer</a>,
     requester: &<a href="">signer</a>,
     share: u64,
