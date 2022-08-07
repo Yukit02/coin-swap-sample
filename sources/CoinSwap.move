@@ -13,7 +13,7 @@ module CoinSwap::CoinSwap {
         share: u64,
     }
 
-    public fun create_pool<CoinType1: drop, CoinType2: drop>(
+    public entry fun create_pool<CoinType1: drop, CoinType2: drop>(
         coinswap: &signer,
         requester: &signer,
         coin1: u64,
@@ -46,7 +46,7 @@ module CoinSwap::CoinSwap {
         numerator / denominator
     }
 
-    public fun coin1_to_coin2_swap_input<CoinType1: drop, CoinType2: drop>(
+    public entry fun coin1_to_coin2_swap_input<CoinType1: drop, CoinType2: drop>(
         coinswap: &signer,
         requester: &signer,
         coin1: u64,
@@ -64,7 +64,7 @@ module CoinSwap::CoinSwap {
         BasicCoin::transfer<CoinType2>(coinswap, signer::address_of(requester), coin2, witness2);
     }
 
-    public fun add_liquidity<CoinType1: drop, CoinType2: drop>(
+    public entry fun add_liquidity<CoinType1: drop, CoinType2: drop>(
         account: &signer,
         coin1: u64,
         coin2: u64,
@@ -86,7 +86,7 @@ module CoinSwap::CoinSwap {
         PoolToken::mint<CoinType1, CoinType2>(signer::address_of(account), share_minted)
     }
 
-    public fun remove_liquidity<CoinType1: drop, CoinType2: drop>(
+    public entry fun remove_liquidity<CoinType1: drop, CoinType2: drop>(
         coinswap: &signer,
         requester: &signer,
         share: u64,
