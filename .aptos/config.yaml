@@ -4,5 +4,5 @@ profiles:
     private_key: "0x89812dd9aa55a481d07d21fa6914dfa7fce6580e32562f30a792954bcdfdc35e"
     public_key: "0x66709c67bd0300c33907e1ddc67c913fa1833507fa08cff16b9966c4bc4d312e"
     account: d5f95fa368dc2b538cbfb2d290f8040ec7658d35c4f30d354032d74fea8aee00
-    rest_url: "https://fullnode.devnet.aptoslabs.com/"
-    faucet_url: "https://faucet.devnet.aptoslabs.com/"
+    rest_url: "http://localhost:8080/"
+    faucet_url: "http://localhost:8000/"
